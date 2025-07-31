@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>💖</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      height: 100%;
+      background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+      font-family: 'Segoe UI', sans-serif;
+      cursor: pointer;
+    }
+
+    #startMessage {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: #ccc;
+      font-size: 2rem;
+      text-align: center;
+      opacity: 1;
+      z-index: 20;
+      transition: opacity 0.8s ease;
+    }
+
+    #startMessage.hide {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    #loveText {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.8);
+      color: #fff;
+      font-size: 4rem;
+      text-shadow: 0 0 15px #ff69b4, 0 0 25px #ff69b4;
+      opacity: 0;
+      transition: all 0.8s ease;
+      z-index: 10;
+    }
+
+    #loveText.show {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1.2);
+    }
+
+    .emoji {
+      position: absolute;
+      animation: float 4s ease-in forwards;
+      pointer-events: none;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-100vh) rotate(360deg) scale(1.5);
+        opacity: 0;
+      }
+    }
+
+    .stars {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: white;
+      border-radius: 50%;
+      animation: twinkle 3s infinite ease-in-out;
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.1; transform: scale(0.8); }
+      50% { opacity: 1; transform: scale(1.5); }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="startMessage">دوسي علي الشاشه 💫</div>
+  <div id="loveText"> بحبك </div>
+
+  <script>
+    const loveText = document.getElementById("loveText");
+    const startMessage = document.getElementById("startMessage");
+    let started = false;
+
+    document.body.addEventListener("click", () => {
+      if (!started) {
+        started = true;
+        startMessage.classList.add("hide");
+        loveText.classList.add("show");
+      }
+
+      // Generate emojis
+      for (let i = 0; i < 40; i++) {
+        const el = document.createElement("div");
+        el.className = "emoji";
+        el.innerText = Math.random() > 0.5 ? "💖" : "🚀";
+        el.style.left = Math.random() * window.innerWidth + "px";
+        el.style.bottom = "0px";
+        el.style.fontSize = (20 + Math.random() * 30) + "px";
+        el.style.animationDuration = (2 + Math.random() * 2) + "s";
+        document.body.appendChild(el);
+        setTimeout(() => el.remove(), 5000);
+      }
+
+      // Generate stars
+      for (let i = 0; i < 30; i++) {
+        const star = document.createElement("div");
+        star.className = "stars";
+        star.style.left = Math.random() * window.innerWidth + "px";
+        star.style.top = Math.random() * window.innerHeight + "px";
+        star.style.animationDuration = (1 + Math.random() * 2) + "s";
+        document.body.appendChild(star);
+        setTimeout(() => star.remove(), 4000);
+      }
+    });
+  </script>
+
+</body>
+</html>
